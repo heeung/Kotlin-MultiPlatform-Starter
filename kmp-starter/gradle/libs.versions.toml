@@ -1,0 +1,19 @@
+[versions]
+kotlin-version = "1.9.10"
+agp-version = "7.4.1"
+compose-version = "1.5.10"
+ktor-version = "2.3.6"
+koin-version = "3.4.0"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp.version" }
+android-library = { id = "com.android.library", version.ref = "agp.version" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin.version" }
+
+[libraries]
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor.version" }
+ktor-jvm = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor.version" }
+koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin.version" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+androidx-core = { module = "androidx.core:core-ktx", version = "1.10.1" }
+androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
