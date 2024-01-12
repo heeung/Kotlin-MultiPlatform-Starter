@@ -4,6 +4,8 @@ agp-version = "7.4.1"
 compose-version = "1.5.10"
 ktor-version = "2.3.6"
 koin-version = "3.4.0"
+compose-ui-util-version = "1.4.0"
+skiko-viersion = "0.7.85"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp.version" }
@@ -17,3 +19,5 @@ koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin.version" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-core = { module = "androidx.core:core-ktx", version = "1.10.1" }
 androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
+compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose.ui.util.version" }
+skiko-window = { module = "org.jetbrains.skiko:skiko-awt-runtime-windows-x64", version.ref = "skiko.viersion" }

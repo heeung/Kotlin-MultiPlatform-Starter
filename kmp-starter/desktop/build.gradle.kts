@@ -21,8 +21,9 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":common"))
+                implementation(libs.compose.ui.util)
                 implementation(compose.desktop.currentOs)
-                implementation("org.jetbrains.skiko:skiko-awt-runtime-windows-x64:0.7.85")
+                implementation(libs.skiko.window)
             }
         }
         val jvmTest by getting
