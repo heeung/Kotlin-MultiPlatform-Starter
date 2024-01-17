@@ -1,7 +1,10 @@
 plugins {
-    id("org.jetbrains.compose")
-    id("com.android.application")
-    kotlin("android")
+//    id("org.jetbrains.compose")
+//    id("com.android.application")
+//    kotlin("android")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp)
 }
 
 group = "com.example"
@@ -32,11 +35,19 @@ android {
             isMinifyEnabled = false
         }
     }
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
 }
 
 dependencies {
     implementation(project(":common"))
     implementation(libs.androidx.activity.compose)
+    implementation(libs.koin.android.compose)
 }
 
 tasks.register("BuildAndRun") {

@@ -10,7 +10,9 @@ import com.example.common.data.dto.TodoItem
 import com.example.common.ui.dialog.EditDialog
 
 @Composable
-public fun RootContent(modifier: Modifier = Modifier) {
+public fun RootContent(
+    modifier: Modifier = Modifier,
+) {
     val model = remember { RootStore() }
     val state = model.state
 

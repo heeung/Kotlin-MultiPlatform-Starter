@@ -31,10 +31,12 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.common.data.dto.TodoItem
+import com.example.common.domain.usecase.comment.GetCommentListUseCase
 import com.example.common.utils.MARGIN_SCROLLBAR
 import com.example.common.utils.VerticalScrollbar
 import com.example.common.utils.onKeyUp
 import com.example.common.utils.rememberScrollbarAdapter
+import org.koin.java.KoinJavaComponent.get
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

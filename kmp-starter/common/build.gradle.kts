@@ -1,13 +1,19 @@
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    id("com.android.library")
+//    kotlin("multiplatform")
+//    id("org.jetbrains.compose")
+//    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.desktop)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.ksp)
+    kotlin("plugin.serialization")
+    id("kotlin-parcelize")
 }
 
 group = "com.example"
 version = "1.0-SNAPSHOT"
 
-@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+//@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
     androidTarget {
         compilations.all {
@@ -22,13 +28,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+//                api(libs.compose.bom)
+                api(compose.foundation)
+                api(compose.material3)
                 api(compose.runtime)
                 api(compose.ui)
-                api(compose.foundation)
-                api(compose.materialIconsExtended)
-                api(compose.material3)
-                api(libs.ktor.core)
-                api(libs.koinCore)
+//                api(libs.compose.materialIconsExtended)
+                api(libs.kotlinInject.runtime)
+
+                api(libs.koin.core)
+
+                api(libs.napier)
+
+                api(libs.bundles.ktor)
+                api(libs.kotlinx.serialization.json)
             }
         }
 
@@ -42,7 +55,13 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.core)
-                api(libs.ktor.jvm)
+
+                api(libs.ktor.okHttp)
+
+                api(libs.koin.core)
+                api(libs.koin.android)
+
+//                api(libs.napier.android)
             }
         }
 
@@ -50,13 +69,18 @@ kotlin {
             dependencies {
                 api(compose.desktop.common)
                 api(compose.preview)
-                api(libs.ktor.jvm)
+
+                api(libs.ktor.okHttp)
+
+                api(libs.koin.core)
+                api(libs.koin.jvm)
+
+//                api(libs.ktor.negotiation)
+//                api(libs.napier.jvm)
             }
         }
 
         val desktopTest by getting
-
-
     }
 
     explicitApi()

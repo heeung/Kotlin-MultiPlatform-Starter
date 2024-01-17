@@ -1,23 +1,63 @@
 [versions]
-kotlin-version = "1.9.10"
-agp-version = "7.4.1"
-compose-version = "1.5.10"
-ktor-version = "2.3.6"
-koin-version = "3.4.0"
-compose-ui-util-version = "1.4.0"
-skiko-viersion = "0.7.85"
-
-[plugins]
-android-application = { id = "com.android.application", version.ref = "agp.version" }
-android-library = { id = "com.android.library", version.ref = "agp.version" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin.version" }
+androidx-activity = "1.7.2"
+kotlin = "1.9.10"
+ksp = "1.9.10-1.0.13"
+agp = "7.4.1"
+compose = "1.5.10"
+kotlinInject = "0.6.3"
+compose-ui-util = "1.4.0"
+skiko = "0.7.85"
+ktor = "2.3.6"
+koin = "3.2.0"
+kotlinxSerialization = "1.6.0"
+napier = "2.6.1"
 
 [libraries]
-ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor.version" }
-ktor-jvm = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor.version" }
-koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin.version" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-core = { module = "androidx.core:core-ktx", version = "1.10.1" }
-androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
-compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose.ui.util.version" }
-skiko-window = { module = "org.jetbrains.skiko:skiko-awt-runtime-windows-x64", version.ref = "skiko.viersion" }
+
+compose-foundation = { module = 'androidx.compose.foundation:foundation' }
+compose-material3 = { module = 'androidx.compose.material3:material3' }
+compose-runtime = { module = 'androidx.compose.runtime:runtime' }
+compose-ui = { module = 'androidx.compose.ui:ui' }
+compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose-ui-util" }
+
+kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp', version.ref = 'kotlinInject' }
+kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlinInject' }
+
+skiko-window = { module = "org.jetbrains.skiko:skiko-awt-runtime-windows-x64", version.ref = "skiko" }
+
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref= "ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-jvm = { module = "io.insert-koin:koin-core-jvm", version.ref = "koin" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+napier-android = { module = "io.github.aakira:napier-android", version.ref = "napier" }
+napier-jvm = { module = "io.github.aakira:napier-jvm", version.ref = "napier" }
+
+[plugins]
+compose-desktop = { id = "org.jetbrains.compose", version.ref = "compose" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref = 'kotlin' }
+ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
+serialization = { id = "plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+ktor = [
+    "ktor-core",
+    "ktor-logging",
+    "ktor-serialization",
+    "ktor-negotiation"
+]
