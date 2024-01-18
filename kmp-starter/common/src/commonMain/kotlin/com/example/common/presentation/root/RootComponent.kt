@@ -3,7 +3,9 @@ package com.example.common.presentation.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.example.common.presentation.comment.CommentComponent
 import com.example.common.presentation.memo.MemoComponent
@@ -41,5 +43,13 @@ public class RootComponent(
         public data object Comment : Config
         @Serializable
         public data object Memo : Config
+    }
+
+    public fun onCommentClick() {
+        navigation.bringToFront(Config.Comment)
+    }
+
+    public fun onMemoClick() {
+        navigation.bringToFront(Config.Memo)
     }
 }
