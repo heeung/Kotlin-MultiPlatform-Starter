@@ -35,13 +35,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.common.data.dto.TodoItem
 import com.example.common.presentation.memo.dialog.EditDialog
+import com.example.common.util.CustomColor
 import com.example.common.util.MARGIN_SCROLLBAR
 import com.example.common.util.VerticalScrollbar
 import com.example.common.util.onKeyUp
 import com.example.common.util.rememberScrollbarAdapter
 
 @Composable
-internal fun MemoContent(
+internal fun MemoScreen(
     component: MemoComponent,
     modifier: Modifier = Modifier,
 ) {
@@ -49,7 +50,8 @@ internal fun MemoContent(
     val state = model.state
 
     MemoView(
-        modifier = modifier.background(MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .background(CustomColor.White),
         items = state.items,
         inputText = state.inputText,
         onItemClicked = model::onItemClicked,

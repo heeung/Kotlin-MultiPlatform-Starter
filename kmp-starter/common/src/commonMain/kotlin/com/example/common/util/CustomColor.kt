@@ -12,4 +12,13 @@ internal object CustomColor {
 
     @Stable
     val White = Color(0xFFFFFFFF)
+
+    @Stable
+    val DefaultButtonColor = Color(0xFF7593FF)
+
+    @Stable
+    val Gray = Color(0xFFBBBBBB)
+
+    @Stable
+    val Transparent = Color(0x00000000)
 }

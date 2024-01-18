@@ -14,6 +14,7 @@ napier = "2.6.1"
 decompose = "2.2.2"
 reaktive = "1.2.3"
 essenty = "1.3.0"
+material3 = "1.1.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -67,6 +68,7 @@ reaktive-reaktive = { group = "com.badoo.reaktive", name = "reaktive", version.r
 reaktive-reaktiveTesting = { group = "com.badoo.reaktive", name = "reaktive-testing", version.ref = "reaktive" }
 reaktive-coroutinesInterop = { group = "com.badoo.reaktive", name = "coroutines-interop", version.ref = "reaktive" }
 reaktive-utils = { group = "com.badoo.reaktive", name = "utils-jvm", version.ref = "reaktive" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 [plugins]
 compose-desktop = { id = "org.jetbrains.compose", version.ref = "compose" }

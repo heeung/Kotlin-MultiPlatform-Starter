@@ -56,7 +56,7 @@ fun main() {
                 isMinimized = false
                 position = WindowPosition(Alignment.TopStart)
             },
-            icon = BitmapPainter(useResource("drawable/expert_appicon.png", ::loadImageBitmap)),
+            icon = BitmapPainter(useResource("drawable/ic_app.png", ::loadImageBitmap)),
             resizable = false,
         ) {
             MaterialTheme() {
