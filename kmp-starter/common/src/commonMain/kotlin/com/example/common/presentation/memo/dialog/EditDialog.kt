@@ -1,4 +1,4 @@
-package com.example.common.ui.dialog
+package com.example.common.presentation.memo.dialog
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

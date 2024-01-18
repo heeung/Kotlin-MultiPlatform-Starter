@@ -1,4 +1,4 @@
-package com.example.common.utils
+package com.example.common.util
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable

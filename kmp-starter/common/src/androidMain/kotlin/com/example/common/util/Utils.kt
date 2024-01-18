@@ -1,12 +1,13 @@
 @file:JvmName("Utils")
 
-package com.example.common.utils
+package com.example.common.util
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.common.util.ScrollbarAdapter
 
 internal actual val MARGIN_SCROLLBAR: Dp = 0.dp
 

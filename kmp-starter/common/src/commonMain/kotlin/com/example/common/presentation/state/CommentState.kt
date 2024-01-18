@@ -1,4 +1,4 @@
-package com.example.common.ui.state
+package com.example.common.presentation.state
 
 import com.example.common.data.entity.Comment
 

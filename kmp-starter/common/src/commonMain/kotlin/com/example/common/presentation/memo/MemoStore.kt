@@ -1,13 +1,13 @@
-package com.example.common.data
+package com.example.common.presentation.memo
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.common.data.dto.TodoItem
 
-internal class RootStore {
+internal class MemoStore {
 
-    var state: RootState by mutableStateOf(initialState())
+    var state: MemoState by mutableStateOf(initialState())
         private set
 
     fun onItemClicked(id: Long) {
@@ -56,24 +56,24 @@ internal class RootStore {
         }
     }
 
-    private fun RootState.updateItem(id: Long, transformer: (TodoItem) -> TodoItem): RootState =
+    private fun MemoState.updateItem(id: Long, transformer: (TodoItem) -> TodoItem): MemoState =
         copy(items = items.updateItem(id = id, transformer = transformer))
 
     private fun List<TodoItem>.updateItem(id: Long, transformer: (TodoItem) -> TodoItem): List<TodoItem> =
         map { item -> if (item.id == id) transformer(item) else item }
 
-    private fun initialState(): RootState =
-        RootState(
+    private fun initialState(): MemoState =
+        MemoState(
             items = (1L..5L).map { id ->
                 TodoItem(id = id, text = "Some text $id")
             }
         )
 
-    private inline fun setState(update: RootState.() -> RootState) {
+    private inline fun setState(update: MemoState.() -> MemoState) {
         state = state.update()
     }
 
-    data class RootState(
+    data class MemoState(
         val items: List<TodoItem> = emptyList(),
         val inputText: String = "",
         val editingItemId: Long? = null,

@@ -42,6 +42,11 @@ kotlin {
 
                 api(libs.bundles.ktor)
                 api(libs.kotlinx.serialization.json)
+
+                api(libs.decompose)
+                api(libs.decompose.extention)
+
+                api(libs.bundles.reaktive)
             }
         }
 
@@ -75,6 +80,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.jvm)
 
+                api(libs.reaktive.utils)
 //                api(libs.ktor.negotiation)
 //                api(libs.napier.jvm)
             }

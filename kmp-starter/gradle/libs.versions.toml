@@ -11,6 +11,9 @@ ktor = "2.3.6"
 koin = "3.2.0"
 kotlinxSerialization = "1.6.0"
 napier = "2.6.1"
+decompose = "2.2.2"
+reaktive = "1.2.3"
+essenty = "1.3.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -28,22 +31,42 @@ kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', ver
 
 skiko-window = { module = "org.jetbrains.skiko:skiko-awt-runtime-windows-x64", version.ref = "skiko" }
 
+# Ktor
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref= "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
+# Koin
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-jvm = { module = "io.insert-koin:koin-core-jvm", version.ref = "koin" }
 
+# Serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
+# Napier
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 napier-android = { module = "io.github.aakira:napier-android", version.ref = "napier" }
 napier-jvm = { module = "io.github.aakira:napier-jvm", version.ref = "napier" }
+
+# Decompose
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-extention = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
+
+# Essenty
+essenty-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
+essenty-stateKeeper = { group = "com.arkivanov.essenty", name = "state-keeper", version.ref = "essenty" }
+essenty-instanceKeeper = { group = "com.arkivanov.essenty", name = "instance-keeper", version.ref = "essenty" }
+essenty-backHandler = { group = "com.arkivanov.essenty", name = "back-handler", version.ref = "essenty" }
+
+# Reaktive
+reaktive-reaktive = { group = "com.badoo.reaktive", name = "reaktive", version.ref = "reaktive" }
+reaktive-reaktiveTesting = { group = "com.badoo.reaktive", name = "reaktive-testing", version.ref = "reaktive" }
+reaktive-coroutinesInterop = { group = "com.badoo.reaktive", name = "coroutines-interop", version.ref = "reaktive" }
+reaktive-utils = { group = "com.badoo.reaktive", name = "utils-jvm", version.ref = "reaktive" }
 
 [plugins]
 compose-desktop = { id = "org.jetbrains.compose", version.ref = "compose" }
@@ -60,4 +83,8 @@ ktor = [
     "ktor-logging",
     "ktor-serialization",
     "ktor-negotiation"
+]
+reaktive = [
+    "reaktive-reaktive",
+    "reaktive-coroutinesInterop"
 ]

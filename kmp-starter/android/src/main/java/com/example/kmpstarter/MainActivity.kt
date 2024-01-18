@@ -6,7 +6,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import android.app.Activity
 import android.graphics.Color
 import android.os.Build
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -15,39 +14,29 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.example.common.ui.content.MainViewModel
+import com.arkivanov.decompose.defaultComponentContext
+import com.example.common.presentation.root.RootComponent
+import com.example.common.presentation.root.RootContent
 import io.github.aakira.napier.Napier
-import main.RootView
-import org.koin.android.ext.android.inject
-import org.koin.androidx.compose.get
+//import main.RootView
 import org.koin.androidx.compose.getViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
 
-//    private val viewModel: MainViewModel by inject()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val root =
+            RootComponent(
+                componentContext = defaultComponentContext(),
+            )
+
         setContent {
             MaterialTheme {
-//                RootView()
-//                Screen(viewModel)
-                Screen()
+                RootContent(root)
             }
         }
     }
-}
-
-@Composable
-fun Screen(
-    viewModel: MainViewModel = getViewModel()
-) {
-    val commentListState = viewModel.commentListState.collectAsState(false)
-    viewModel.getCommentList()
-    Napier.d { commentListState.value.toString() }
-
-    RootView()
 }
 
 @Composable
