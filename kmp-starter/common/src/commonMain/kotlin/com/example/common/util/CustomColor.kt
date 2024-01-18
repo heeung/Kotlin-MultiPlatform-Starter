@@ -9,4 +9,7 @@ internal object CustomColor {
 
     @Stable
     val SkyBlue = Color(0xFF97ECFF)
+
+    @Stable
+    val White = Color(0xFFFFFFFF)
 }
