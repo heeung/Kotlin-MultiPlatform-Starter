@@ -7,4 +7,4 @@
 ### 01/18
 + Navigation
 + Animation
-+ Loggin
++ Logging
