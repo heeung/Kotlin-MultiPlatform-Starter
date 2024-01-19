@@ -8,3 +8,6 @@
 + Navigation
 + Animation
 + Logging
+
+### 01/19
++ Multiplatform Settings (개선 필요)
