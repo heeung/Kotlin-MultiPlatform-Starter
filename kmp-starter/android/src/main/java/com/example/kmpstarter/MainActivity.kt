@@ -6,6 +6,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import android.app.Activity
 import android.graphics.Color
 import android.os.Build
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -15,13 +16,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
+import com.example.common.data.local.preference.SettingRepository
 import com.example.common.presentation.root.RootComponent
 import com.example.common.presentation.root.RootContent
+import com.russhwolf.settings.SharedPreferencesSettings
 import io.github.aakira.napier.Napier
 //import main.RootView
 import org.koin.androidx.compose.getViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val settingsRepository by lazy {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val settings = SharedPreferencesSettings(sharedPrefs)
+        SettingRepository(settings)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

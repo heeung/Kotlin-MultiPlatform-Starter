@@ -47,6 +47,12 @@ kotlin {
                 api(libs.decompose.extention)
 
                 api(libs.bundles.reaktive)
+
+                api(libs.imageLoader)
+//                api(libs.imageLoader.extention.moko)
+//                api(libs.imageLoader.extention.blur)
+
+                api(libs.multiplatform.settings)
             }
         }
 
@@ -83,6 +89,7 @@ kotlin {
                 api(libs.reaktive.utils)
 //                api(libs.ktor.negotiation)
 //                api(libs.napier.jvm)
+//                api(libs.imageLoader.extention.jvm)
             }
         }
 

@@ -8,7 +8,10 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.example.common.presentation.comment.CommentComponent
+import com.example.common.presentation.login.LoginComponent
 import com.example.common.presentation.memo.MemoComponent
+import com.example.common.presentation.photo.PhotoComponent
+import com.example.common.util.PreferencesUtil
 import kotlinx.serialization.Serializable
 
 public class RootComponent(
@@ -29,12 +32,16 @@ public class RootComponent(
     public sealed class Child {
         public class CommentChild(public val component: CommentComponent) : Child()
         public class MemoChild(public val component: MemoComponent) : Child()
+        public class LoginChild(public val component: LoginComponent) : Child()
+//        public class PhotoChild(public val component: PhotoComponent) : Child()
     }
 
     private fun child(config: Config, componentContext: ComponentContext): Child =
         when (config) {
             is Config.Comment -> Child.CommentChild(CommentComponent(componentContext))
             is Config.Memo -> Child.MemoChild(MemoComponent(componentContext))
+            is Config.Login -> Child.LoginChild(LoginComponent(componentContext, PreferencesUtil.settingsRepository!!))
+//            is Config.Photo -> Child.PhotoChild(PhotoComponent(componentContext))
         }
 
     @Serializable
@@ -43,6 +50,10 @@ public class RootComponent(
         public data object Comment : Config
         @Serializable
         public data object Memo : Config
+        @Serializable
+        public data object Login : Config
+//        @Serializable
+//        public data object Photo : Config
     }
 
     public fun onCommentClick() {
@@ -52,4 +63,12 @@ public class RootComponent(
     public fun onMemoClick() {
         navigation.bringToFront(Config.Memo)
     }
+
+    public fun onLoginClick() {
+        navigation.bringToFront(Config.Login)
+    }
+
+//    public fun onPhotoClick() {
+//        navigation.bringToFront(Config.Photo)
+//    }
 }

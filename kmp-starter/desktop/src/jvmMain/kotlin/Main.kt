@@ -17,6 +17,7 @@ import com.badoo.reaktive.scheduler.overrideSchedulers
 import com.example.common.di.sharedModule
 import com.example.common.presentation.root.RootComponent
 import com.example.common.presentation.root.RootContent
+import com.example.common.util.PreferencesUtil
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
@@ -29,10 +30,14 @@ import java.io.ObjectOutputStream
 
 @OptIn(ExperimentalCoroutinesApi::class)
 fun main() {
+    PreferencesUtil.init()
+
     startKoin {
         modules(sharedModule)
     }
+
     Napier.base(DebugAntilog())
+
     overrideSchedulers(main = Dispatchers.Main::asScheduler)
 
     val lifecycle = LifecycleRegistry()

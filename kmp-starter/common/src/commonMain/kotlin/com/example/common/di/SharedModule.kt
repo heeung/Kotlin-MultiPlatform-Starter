@@ -6,5 +6,6 @@ public val sharedModule: List<Module> = listOf(
     networkModule,
     repositoryModule,
     useCaseModule,
-    serviceModule
+    serviceModule,
+    prefModule
 )

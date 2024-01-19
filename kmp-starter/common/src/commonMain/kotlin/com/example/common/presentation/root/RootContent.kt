@@ -13,6 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -22,19 +26,34 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.Direction
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.StackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.StackAnimator
-import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.isEnter
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
+import com.example.common.data.local.preference.SettingConfig
 import com.example.common.presentation.comment.CommentScreen
+import com.example.common.presentation.login.LoginScreen
 import com.example.common.presentation.memo.MemoScreen
 import com.example.common.util.CustomColor
+import com.example.common.util.PreferencesUtil
+import io.github.aakira.napier.Napier
+import java.util.prefs.Preferences
 
+private const val TAG = "RootContent"
 @Composable
 public fun RootContent(
     component: RootComponent,
     modifier: Modifier = Modifier,
 ) {
+//    val firstString = PreferencesUtil.settingsRepository!!.mySettings.first().get()
+//    Napier.d(tag = TAG) { "${firstString}" }
+//
+//    PreferencesUtil.settingsRepository!!.mySettings.first().set("2")
+//    val secondString = PreferencesUtil.settingsRepository!!.mySettings.first().get()
+//    Napier.d(tag = TAG) { "${secondString}" }
+//
+//    PreferencesUtil.settingsRepository!!.mySettings.first().set("3")
+//    val thirdString = PreferencesUtil.settingsRepository!!.mySettings.first().get()
+//    Napier.d(tag = TAG) { "${thirdString}" }
     Scaffold (
         modifier = modifier
     ) {
@@ -46,7 +65,7 @@ public fun RootContent(
             Row(
                 modifier = Modifier
                     .height(50.dp)
-                    .width(500.dp)
+                    .width(800.dp)
                     .shadow(10.dp, RoundedCornerShape(50))
                     .align(Alignment.BottomCenter),
                 verticalAlignment = Alignment.CenterVertically,
@@ -86,6 +105,38 @@ public fun RootContent(
                         textAlign = TextAlign.Center
                     )
                 }
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .background(
+                            color = CustomColor.DefaultButtonColor,
+                        )
+                        .weight(1f)
+                        .clickable { component.onLoginClick() },
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = "LoginComponent",
+                        textAlign = TextAlign.Center
+                    )
+                }
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxHeight()
+//                        .background(
+//                            color = CustomColor.DefaultButtonColor,
+//                        )
+//                        .weight(1f)
+//                        .clickable {
+//                            component.onPhotoClick()
+//                        },
+//                    contentAlignment = Alignment.Center
+//                ){
+//                    Text(
+//                        text = "PhotoComponent",
+//                        textAlign = TextAlign.Center
+//                    )
+//                }
             }
         }
     }
@@ -97,11 +148,13 @@ private fun Children(component: RootComponent, modifier: Modifier = Modifier) {
         stack = component.childStack,
         modifier = modifier,
 //        animation = stackAnimation(fade())
-        animation = tabAnimation()
+//        animation = tabAnimation()
     ) {
         when (val child = it.instance) {
             is RootComponent.Child.CommentChild -> CommentScreen(component = child.component)
             is RootComponent.Child.MemoChild -> MemoScreen(component = child.component)
+            is RootComponent.Child.LoginChild -> LoginScreen(component = child.component)
+//            is RootComponent.Child.PhotoChild -> PhotoScreen(component = child.component)
         }
     }
 }
@@ -120,6 +173,8 @@ private val RootComponent.Child.index: Int
         when (this) {
             is RootComponent.Child.CommentChild -> 0
             is RootComponent.Child.MemoChild -> 1
+            is RootComponent.Child.LoginChild -> 2
+//            is RootComponent.Child.PhotoChild -> 2
         }
 
 private fun StackAnimator.flipSide(): StackAnimator =

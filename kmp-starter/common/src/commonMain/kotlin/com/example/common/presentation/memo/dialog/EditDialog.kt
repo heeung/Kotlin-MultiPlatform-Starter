@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.common.data.dto.TodoItem
+import com.example.common.data.entity.TodoItem
 
 @Composable
 internal fun EditDialog(

@@ -3,7 +3,7 @@ package com.example.common.presentation.memo
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.common.data.dto.TodoItem
+import com.example.common.data.entity.TodoItem
 
 internal class MemoStore {
 
