@@ -17,6 +17,7 @@ essenty = "1.3.0"
 material3 = "1.1.2"
 imageLoader = "1.7.1"
 multiplatformSettings = "1.1.0"
+sqlDelight = "2.0.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -81,8 +82,10 @@ imageLoader-extention-jvm = { module = "io.github.qdsfdhvh:image-loader-extensio
 # Multiplatform Settings
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 
-# SQLDelight
-
+# SqlDelight
+sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+#sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+#sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 
 [plugins]
 compose-desktop = { id = "org.jetbrains.compose", version.ref = "compose" }
@@ -92,6 +95,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
 serialization = { id = "plugin.serialization", version.ref = "kotlin" }
+sqlDelght = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 [bundles]
 ktor = [

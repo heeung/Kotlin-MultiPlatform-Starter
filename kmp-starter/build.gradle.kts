@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.compose.desktop) apply false
     kotlin("plugin.serialization") version libs.versions.kotlin.get() apply false
+    alias(libs.plugins.sqlDelght) apply false
 //    id("org.jetbrains.compose") version libs.versions.compose.version.get() apply false
 }
 

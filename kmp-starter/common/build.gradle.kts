@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.compose.desktop)
     alias(libs.plugins.android.library)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.sqlDelght)
     kotlin("plugin.serialization")
     id("kotlin-parcelize")
 }
@@ -53,6 +54,8 @@ kotlin {
 //                api(libs.imageLoader.extention.blur)
 
                 api(libs.multiplatform.settings)
+
+                api(libs.sqlDelight.runtime)
             }
         }
 
@@ -72,6 +75,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.android)
 
+//                api(libs.sqlDelight.android)
 //                api(libs.napier.android)
             }
         }
@@ -87,6 +91,8 @@ kotlin {
                 api(libs.koin.jvm)
 
                 api(libs.reaktive.utils)
+
+//                api(libs.sqlDelight.jvm)
 //                api(libs.ktor.negotiation)
 //                api(libs.napier.jvm)
 //                api(libs.imageLoader.extention.jvm)
@@ -111,3 +117,15 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+//sqldelight {
+//    databases {
+//        create("MemoDb") {
+//            packageName.set("com.example.common.data.local.sqldelight")
+//        }
+////        MemoDb {
+////            packageName = "com.example.common"
+////        }
+//        linkSqlite.set(true)
+//    }
+//}
