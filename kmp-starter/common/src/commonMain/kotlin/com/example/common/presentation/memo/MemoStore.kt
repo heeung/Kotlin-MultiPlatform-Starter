@@ -4,6 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.common.data.entity.TodoItem
+import com.example.memo.db.Memo
+import com.example.common.util.DBUtil
+import com.example.common.util.getMemoList
+import io.github.aakira.napier.Napier
 
 internal class MemoStore {
 
@@ -16,7 +20,7 @@ internal class MemoStore {
 
     fun onItemDoneChanged(id: Long, isDone: Boolean) {
         setState {
-            updateItem(id = id) { it.copy(isDone = isDone) }
+            updateItem(id = requireNotNull(editingItemId), if (isDone) 1L else 0L, items[editingItemId.toInt()].content)
         }
     }
 
@@ -26,13 +30,21 @@ internal class MemoStore {
 
     fun onAddItemClicked() {
         setState {
-            val newItem =
-                TodoItem(
-                    id = items.maxOfOrNull(TodoItem::id)?.plus(1L) ?: 1L,
-                    text = inputText,
-                )
+//            val newItem =
+//                Memo(
+//                    id = items.maxOfOrNull(TodoItem::id)?.plus(1L) ?: 1L,
+//                    content = inputText,
+//                    is_done = 0
+//                )
 
-            copy(items = items + newItem, inputText = "")
+            DBUtil.memoQueries.insertMemo(
+                content = inputText,
+                is_done = 0
+            )
+
+            val list = DBUtil.memoQueries.getMemoList()
+
+            copy(items = list, inputText = "")
         }
     }
 
@@ -46,35 +58,41 @@ internal class MemoStore {
 
     fun onEditorTextChanged(text: String) {
         setState {
-            updateItem(id = requireNotNull(editingItemId)) { it.copy(text = text) }
+            updateItem(id = requireNotNull(editingItemId), items[editingItemId.toInt()].is_done, content = text)
         }
     }
 
-    fun onEditorDoneChanged(isDone: Boolean) {
+    fun onEditorDoneChanged(isDone: Long) {
         setState {
-            updateItem(id = requireNotNull(editingItemId)) { it.copy(isDone = isDone) }
+            updateItem(id = requireNotNull(editingItemId), isDone, items[editingItemId.toInt()].content)
         }
     }
 
-    private fun MemoState.updateItem(id: Long, transformer: (TodoItem) -> TodoItem): MemoState =
-        copy(items = items.updateItem(id = id, transformer = transformer))
+    private fun MemoState.updateItem(id: Long, is_done: Long, content: String): MemoState {
+        DBUtil.memoQueries.updateMemo(id = id, is_done = is_done, content = content)
 
-    private fun List<TodoItem>.updateItem(id: Long, transformer: (TodoItem) -> TodoItem): List<TodoItem> =
-        map { item -> if (item.id == id) transformer(item) else item }
+        return initialState()
+    }
 
-    private fun initialState(): MemoState =
-        MemoState(
-            items = (1L..5L).map { id ->
-                TodoItem(id = id, text = "Some text $id")
-            }
+//    private fun List<Memo>.updateItem(id: Long, transformer: (Memo) -> Memo): List<Memo> =
+//        map { item -> if (item.id == id) transformer(item) else item }
+
+    private fun initialState(): MemoState {
+        val memoList: List<Memo> = DBUtil.memoQueries.getMemoList()
+
+        Napier.d  { "initialStated : $memoList" }
+
+        return MemoState(
+            items = memoList
         )
+    }
 
     private inline fun setState(update: MemoState.() -> MemoState) {
         state = state.update()
     }
 
     data class MemoState(
-        val items: List<TodoItem> = emptyList(),
+        val items: List<Memo> = emptyList(),
         val inputText: String = "",
         val editingItemId: Long? = null,
     )

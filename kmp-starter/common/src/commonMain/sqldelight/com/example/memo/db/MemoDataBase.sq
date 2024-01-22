@@ -1,0 +1,18 @@
+CREATE TABLE Memo(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    content TEXT NOT NULL,
+    is_done INTEGER NOT NULL
+);
+
+insertMemo:
+INSERT INTO Memo (content, is_done)
+VALUES (?, ?);
+
+updateMemo:
+UPDATE Memo
+SET is_done = ?, content = ?
+WHERE id = ?;
+
+selectAll:
+SELECT *
+FROM Memo;

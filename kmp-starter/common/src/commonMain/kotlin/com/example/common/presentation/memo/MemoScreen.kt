@@ -24,6 +24,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -39,46 +41,68 @@ import com.example.common.util.MARGIN_SCROLLBAR
 import com.example.common.util.VerticalScrollbar
 import com.example.common.util.onKeyUp
 import com.example.common.util.rememberScrollbarAdapter
+import com.example.common.util.DBUtil
+import com.example.common.util.getMemoList
+import com.example.memo.db.Memo
+import io.github.aakira.napier.Napier
 
+private const val TAG = "MemoScreen"
 @Composable
 internal fun MemoScreen(
     component: MemoComponent,
     modifier: Modifier = Modifier,
 ) {
-    val model = remember { MemoStore() }
-    val state = model.state
+//    val model = remember { MemoStore() }
+//    val state = model.state
+
+    Napier.d(tag = TAG) { "onCreate" }
+
+    val memoListState by component.memoListState.collectAsState()
+
+    Napier.d(tag = TAG) { "$memoListState" }
 
     MemoView(
         modifier = modifier
             .background(CustomColor.White),
-        items = state.items,
-        inputText = state.inputText,
-        onItemClicked = model::onItemClicked,
-        onItemDoneChanged = model::onItemDoneChanged,
-        onItemDeleteClicked = model::onItemDeleteClicked,
-        onAddItemClicked = model::onAddItemClicked,
-        onInputTextChanged = model::onInputTextChanged,
+        items = memoListState.memoList,
+        inputText = component.inputText,
+//        onItemClicked = model::onItemClicked,
+        onItemDoneChanged = component::onItemDoneChanged,
+//        onItemDeleteClicked = model::onItemDeleteClicked,
+        onAddItemClicked = component::onAddItemClicked,
+        onInputTextChanged = component::onInputTextChanged,
     )
+//    MemoView(
+//        modifier = modifier
+//            .background(CustomColor.White),
+//        items = state.items,
+//        inputText = state.inputText,
+////        onItemClicked = model::onItemClicked,
+//        onItemDoneChanged = model::onItemDoneChanged,
+////        onItemDeleteClicked = model::onItemDeleteClicked,
+//        onAddItemClicked = model::onAddItemClicked,
+//        onInputTextChanged = model::onInputTextChanged,
+//    )
 
-    state.editingItem?.also { item ->
-        EditDialog(
-            item = item,
-            onCloseClicked = model::onEditorCloseClicked,
-            onTextChanged = model::onEditorTextChanged,
-            onDoneChanged = model::onEditorDoneChanged,
-        )
-    }
+//    state.editingItem?.also { item ->
+//        EditDialog(
+//            item = item,
+//            onCloseClicked = model::onEditorCloseClicked,
+//            onTextChanged = model::onEditorTextChanged,
+//            onDoneChanged = model::onEditorDoneChanged,
+//        )
+//    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MemoView(
     modifier: Modifier = Modifier,
-    items: List<TodoItem>,
+    items: List<Memo>,
     inputText: String,
-    onItemClicked: (id: Long) -> Unit,
+//    onItemClicked: (id: Long) -> Unit,
     onItemDoneChanged: (id: Long, isDone: Boolean) -> Unit,
-    onItemDeleteClicked: (id: Long) -> Unit,
+//    onItemDeleteClicked: (id: Long) -> Unit,
     onAddItemClicked: () -> Unit,
     onInputTextChanged: (String) -> Unit,
 ) {
@@ -88,9 +112,9 @@ internal fun MemoView(
         Box(Modifier.weight(1F)) {
             ListContent(
                 items = items,
-                onItemClicked = onItemClicked,
+//                onItemClicked = onItemClicked,
                 onItemDoneChanged = onItemDoneChanged,
-                onItemDeleteClicked = onItemDeleteClicked
+//                onItemDeleteClicked = onItemDeleteClicked
             )
         }
 
@@ -104,10 +128,10 @@ internal fun MemoView(
 
 @Composable
 private fun ListContent(
-    items: List<TodoItem>,
-    onItemClicked: (id: Long) -> Unit,
+    items: List<Memo>,
+//    onItemClicked: (id: Long) -> Unit,
     onItemDoneChanged: (id: Long, isDone: Boolean) -> Unit,
-    onItemDeleteClicked: (id: Long) -> Unit,
+//    onItemDeleteClicked: (id: Long) -> Unit,
 ) {
     Box {
         val listState = rememberLazyListState()
@@ -116,9 +140,9 @@ private fun ListContent(
             items(items) { item ->
                 Item(
                     item = item,
-                    onClicked = { onItemClicked(item.id) },
+//                    onClicked = { onItemClicked(item.id) },
                     onDoneChanged = { onItemDoneChanged(item.id, it) },
-                    onDeleteClicked = { onItemDeleteClicked(item.id) }
+//                    onDeleteClicked = { onItemDeleteClicked(item.id) }
                 )
 
                 Divider()
@@ -134,24 +158,27 @@ private fun ListContent(
 
 @Composable
 private fun Item(
-    item: TodoItem,
-    onClicked: () -> Unit,
+    item: Memo,
+//    onClicked: () -> Unit,
     onDoneChanged: (Boolean) -> Unit,
-    onDeleteClicked: () -> Unit
+//    onDeleteClicked: () -> Unit
 ) {
-    Row(modifier = Modifier.clickable(onClick = onClicked)) {
+    Row(
+        modifier = Modifier
+//            .clickable(onClick = onClicked)
+    ) {
         Spacer(modifier = Modifier.width(8.dp))
 
         Checkbox(
-            checked = item.isDone,
+            checked = if (item.is_done == 0L) false else true,
             modifier = Modifier.align(Alignment.CenterVertically),
-            onCheckedChange = onDoneChanged,
+            onCheckedChange = onDoneChanged
         )
 
         Spacer(modifier = Modifier.width(8.dp))
 
         Text(
-            text = AnnotatedString(item.text),
+            text = AnnotatedString(item.content),
             modifier = Modifier.weight(1F).align(Alignment.CenterVertically),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
@@ -159,7 +186,10 @@ private fun Item(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        IconButton(onClick = onDeleteClicked) {
+        IconButton(
+//            onClick = onDeleteClicked
+            onClick = {  }
+        ) {
             Icon(
                 imageVector = Icons.Default.Delete,
                 contentDescription = null
@@ -198,8 +228,8 @@ private fun Input(
     }
 }
 
-private val MemoStore.MemoState.editingItem: TodoItem?
+private val MemoStore.MemoState.editingItem: Memo?
     get() = editingItemId?.let(items::firstById)
 
-private fun List<TodoItem>.firstById(id: Long): TodoItem? =
+private fun List<Memo>.firstById(id: Long): Memo? =
     firstOrNull { it.id == id }

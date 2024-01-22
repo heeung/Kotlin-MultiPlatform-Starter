@@ -25,6 +25,7 @@ kotlin {
                 implementation(libs.compose.ui.util)
                 implementation(compose.desktop.currentOs)
                 implementation(libs.skiko.window)
+                implementation(libs.slf4j)
             }
         }
         val jvmTest by getting

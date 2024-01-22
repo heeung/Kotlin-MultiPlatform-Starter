@@ -40,12 +40,6 @@ internal fun LoginScreen(
 ) {
     Napier.d(tag = TAG) { "onCreate" }
 
-//    var e = prefRepository.emailPref.get()
-//    var p = prefRepository.passwordPref.get()
-
-//    var email by remember { mutableStateOf(component.e) }
-//    var password by remember { mutableStateOf(component.p) }
-
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

@@ -18,6 +18,8 @@ material3 = "1.1.2"
 imageLoader = "1.7.1"
 multiplatformSettings = "1.1.0"
 sqlDelight = "2.0.0"
+slf4j = "2.0.9"
+jdbc = "3.42.0.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -84,8 +86,15 @@ multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", vers
 
 # SqlDelight
 sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-#sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-#sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+sqlDelight-jvm-runtime = { module = "app.cash.sqldelight:runtime-jvm", version.ref = "sqlDelight" }
+sqlDelight-adapter = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqlDelight" }
+
+jdbc = { module = "org.xerial:sqlite-jdbc", version.ref = "jdbc" }
+
+slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 [plugins]
 compose-desktop = { id = "org.jetbrains.compose", version.ref = "compose" }

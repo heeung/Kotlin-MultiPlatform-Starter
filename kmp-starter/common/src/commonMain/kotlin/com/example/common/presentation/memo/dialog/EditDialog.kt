@@ -23,20 +23,21 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.common.data.entity.TodoItem
+import com.example.memo.db.Memo
 
 @Composable
 internal fun EditDialog(
-    item: TodoItem,
+    item: Memo,
     onCloseClicked: () -> Unit,
     onTextChanged: (String) -> Unit,
-    onDoneChanged: (Boolean) -> Unit,
+    onDoneChanged: (Long) -> Unit,
 ) {
     EditDialog(
         onCloseRequest = onCloseClicked,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             TextField(
-                value = item.text,
+                value = item.content,
                 modifier = Modifier.weight(1F).fillMaxWidth().sizeIn(minHeight = 192.dp),
                 label = { Text("Todo text") },
                 onValueChange = onTextChanged,
@@ -48,8 +49,14 @@ internal fun EditDialog(
                 Text(text = "Completed", Modifier.padding(15.dp))
 
                 Checkbox(
-                    checked = item.isDone,
-                    onCheckedChange = onDoneChanged,
+                    checked = if (item.is_done == 1L) true else false,
+                    onCheckedChange = {
+                        if (it) {
+                            onDoneChanged(1L)
+                        } else {
+                            onDoneChanged(0L)
+                        }
+                    }
                 )
             }
         }

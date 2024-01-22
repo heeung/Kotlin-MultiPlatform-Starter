@@ -14,6 +14,15 @@ plugins {
 group = "com.example"
 version = "1.0-SNAPSHOT"
 
+sqldelight {
+    databases {
+        create("MemoDataBase") {
+            packageName.set("com.example.memo.db")
+        }
+        linkSqlite.set(true)
+    }
+}
+
 //@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
     androidTarget {
@@ -56,6 +65,7 @@ kotlin {
                 api(libs.multiplatform.settings)
 
                 api(libs.sqlDelight.runtime)
+                api(libs.sqlDelight.adapter)
             }
         }
 
@@ -75,7 +85,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.android)
 
-//                api(libs.sqlDelight.android)
+                api(libs.sqlDelight.android)
 //                api(libs.napier.android)
             }
         }
@@ -92,7 +102,10 @@ kotlin {
 
                 api(libs.reaktive.utils)
 
-//                api(libs.sqlDelight.jvm)
+                api(libs.sqlDelight.jvm)
+//                api(libs.sqlDelight.jvm.runtime)
+                api(libs.jdbc)
+//                api(libs.sqlDelight.native)
 //                api(libs.ktor.negotiation)
 //                api(libs.napier.jvm)
 //                api(libs.imageLoader.extention.jvm)
@@ -121,7 +134,7 @@ android {
 //sqldelight {
 //    databases {
 //        create("MemoDb") {
-//            packageName.set("com.example.common.data.local.sqldelight")
+//            packageName.set("com.example.common.data")
 //        }
 ////        MemoDb {
 ////            packageName = "com.example.common"
