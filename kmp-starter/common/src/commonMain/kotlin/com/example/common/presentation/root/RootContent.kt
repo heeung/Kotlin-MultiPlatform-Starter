@@ -33,6 +33,7 @@ import com.example.common.data.local.preference.SettingConfig
 import com.example.common.presentation.comment.CommentScreen
 import com.example.common.presentation.login.LoginScreen
 import com.example.common.presentation.memo.MemoScreen
+import com.example.common.presentation.photo.PhotoScreen
 import com.example.common.util.CustomColor
 import com.example.common.util.PreferencesUtil
 import io.github.aakira.napier.Napier
@@ -65,7 +66,7 @@ public fun RootContent(
             Row(
                 modifier = Modifier
                     .height(50.dp)
-                    .width(800.dp)
+                    .width(1000.dp)
                     .shadow(10.dp, RoundedCornerShape(50))
                     .align(Alignment.BottomCenter),
                 verticalAlignment = Alignment.CenterVertically,
@@ -120,23 +121,23 @@ public fun RootContent(
                         textAlign = TextAlign.Center
                     )
                 }
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxHeight()
-//                        .background(
-//                            color = CustomColor.DefaultButtonColor,
-//                        )
-//                        .weight(1f)
-//                        .clickable {
-//                            component.onPhotoClick()
-//                        },
-//                    contentAlignment = Alignment.Center
-//                ){
-//                    Text(
-//                        text = "PhotoComponent",
-//                        textAlign = TextAlign.Center
-//                    )
-//                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .background(
+                            color = CustomColor.DefaultButtonColor,
+                        )
+                        .weight(1f)
+                        .clickable {
+                            component.onPhotoClick()
+                        },
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = "PhotoComponent",
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }
@@ -154,7 +155,7 @@ private fun Children(component: RootComponent, modifier: Modifier = Modifier) {
             is RootComponent.Child.CommentChild -> CommentScreen(component = child.component)
             is RootComponent.Child.MemoChild -> MemoScreen(component = child.component)
             is RootComponent.Child.LoginChild -> LoginScreen(component = child.component)
-//            is RootComponent.Child.PhotoChild -> PhotoScreen(component = child.component)
+            is RootComponent.Child.PhotoChild -> PhotoScreen(component = child.component)
         }
     }
 }
@@ -174,7 +175,7 @@ private val RootComponent.Child.index: Int
             is RootComponent.Child.CommentChild -> 0
             is RootComponent.Child.MemoChild -> 1
             is RootComponent.Child.LoginChild -> 2
-//            is RootComponent.Child.PhotoChild -> 2
+            is RootComponent.Child.PhotoChild -> 3
         }
 
 private fun StackAnimator.flipSide(): StackAnimator =

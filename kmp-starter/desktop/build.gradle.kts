@@ -3,6 +3,8 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
 //    kotlin("multiplatform")
 //    id("org.jetbrains.compose")
+//    kotlin("jvm")
+//    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.desktop)
     alias(libs.plugins.ksp)
@@ -12,9 +14,10 @@ group = "com.example"
 version = "1.0-SNAPSHOT"
 
 kotlin {
+    jvmToolchain(17)
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = "17"
         }
         withJava()
     }
@@ -34,11 +37,14 @@ kotlin {
 
 compose.desktop {
     application {
+        javaHome = System.getenv("JAVA_HOME")
         mainClass = "MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "common"
+            modules("java.sql", "java.instrument", "java.compiler", "jdk.unsupported")
+            targetFormats(TargetFormat.Exe)
+            packageName = "DesktopApp"
             packageVersion = "1.0.0"
         }
+        jvmArgs += listOf("-Xmx2G")
     }
 }

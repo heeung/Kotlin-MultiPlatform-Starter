@@ -27,12 +27,12 @@ sqldelight {
 kotlin {
     androidTarget {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = "17"
         }
     }
     jvm("desktop") {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = "17"
         }
     }
     sourceSets {
@@ -58,7 +58,7 @@ kotlin {
 
                 api(libs.bundles.reaktive)
 
-                api(libs.imageLoader)
+//                api(libs.imageLoader)
 //                api(libs.imageLoader.extention.moko)
 //                api(libs.imageLoader.extention.blur)
 
@@ -66,6 +66,14 @@ kotlin {
 
                 api(libs.sqlDelight.runtime)
                 api(libs.sqlDelight.adapter)
+
+//                api(libs.coil.core)
+                api(libs.coil)
+//                api(libs.coil.core)
+                api(libs.coil.svg)
+//                api(libs.coil.gif)
+//                api(libs.coil.video)
+                api(libs.coil.core.network)
             }
         }
 
@@ -87,6 +95,8 @@ kotlin {
 
                 api(libs.sqlDelight.android)
 //                api(libs.napier.android)
+//                api(libs.coil.core.android)
+                api(libs.coil.android)
             }
         }
 
@@ -105,10 +115,15 @@ kotlin {
                 api(libs.sqlDelight.jvm)
 //                api(libs.sqlDelight.jvm.runtime)
                 api(libs.jdbc)
+
+//                api(libs.imageLoader.desktop)
+
+//                api(libs.imageLoader.extention.jvm)
 //                api(libs.sqlDelight.native)
 //                api(libs.ktor.negotiation)
 //                api(libs.napier.jvm)
 //                api(libs.imageLoader.extention.jvm)
+                api(libs.coil.core.jvm)
             }
         }
 
@@ -126,19 +141,7 @@ android {
         targetSdk = 34
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
-//sqldelight {
-//    databases {
-//        create("MemoDb") {
-//            packageName.set("com.example.common.data")
-//        }
-////        MemoDb {
-////            packageName = "com.example.common"
-////        }
-//        linkSqlite.set(true)
-//    }
-//}
