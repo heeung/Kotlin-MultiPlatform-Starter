@@ -9,12 +9,14 @@ import com.example.common.data.local.preference.SettingRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.component.KoinComponent
 
 private const val TAG = "LoginComponent"
 public class LoginComponent(
     componentContext: ComponentContext,
-    public val prefRepository: SettingRepository,
+    private val prefRepository: SettingRepository,
 ): KoinComponent, ComponentContext by componentContext {
     private val scope = CoroutineScope(Dispatchers.IO)
 

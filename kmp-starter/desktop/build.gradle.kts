@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.model.CompilerArguments
 
 plugins {
 //    kotlin("multiplatform")
@@ -45,6 +46,17 @@ compose.desktop {
             packageName = "DesktopApp"
             packageVersion = "1.0.0"
         }
-        jvmArgs += listOf("-Xmx2G")
+        jvmArgs += listOf(
+            "-Xmx2G"
+        )
+        // gradle 8.0이상
+//        javaexec {
+//            main = "java.lang.System"
+//            args = listOf(
+//                "setProperty",
+//                "javax.accessibility.assistive_technologies",
+//                ""
+//            )
+//        }
     }
 }

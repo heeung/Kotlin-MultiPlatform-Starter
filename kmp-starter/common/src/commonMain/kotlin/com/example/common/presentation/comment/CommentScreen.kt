@@ -28,6 +28,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -41,6 +43,9 @@ import com.example.common.util.CustomColor
 import com.example.common.util.VerticalScrollbar
 import com.example.common.util.rememberScrollbarAdapter
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 
 private const val TAG = "CommentScreen"
 @Composable
@@ -49,7 +54,7 @@ internal fun CommentScreen(
     modifier: Modifier = Modifier
 ) {
     Napier.d(tag = TAG) { "onCreate" }
-    val commentListState by component.commentListState.collectAsState()
+    val state by component.state.collectAsState()
 
     Box {
         Column(
@@ -59,7 +64,7 @@ internal fun CommentScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            with(commentListState) {
+            with(state) {
                 Napier.d(tag = TAG) { "불러오기 시작합니다." }
                 if (loading) {
                     Loader()
@@ -72,7 +77,6 @@ internal fun CommentScreen(
                     ErrorMessage(it)
                 }
             }
-    //        CommentListContent(commentListState.commentList)
         }
         Box(
             modifier = Modifier

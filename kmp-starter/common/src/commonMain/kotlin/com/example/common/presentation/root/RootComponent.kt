@@ -5,7 +5,12 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.replaceAll
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.subscribe
 import com.example.common.presentation.comment.CommentComponent
@@ -60,18 +65,22 @@ public class RootComponent(
     }
 
     public fun onCommentClick() {
-        navigation.bringToFront(Config.Comment)
+//        navigation.bringToFront(Config.Comment)
+        navigation.replaceCurrent(Config.Comment)
     }
 
     public fun onMemoClick() {
-        navigation.bringToFront(Config.Memo)
+//        navigation.bringToFront(Config.Memo)
+        navigation.replaceCurrent(Config.Memo)
     }
 
     public fun onLoginClick() {
-        navigation.bringToFront(Config.Login)
+//        navigation.bringToFront(Config.Login)
+        navigation.replaceCurrent(Config.Login)
     }
 
     public fun onPhotoClick() {
-        navigation.bringToFront(Config.Photo)
+//        navigation.bringToFront(Config.Photo)
+        navigation.replaceCurrent(Config.Photo)
     }
 }
